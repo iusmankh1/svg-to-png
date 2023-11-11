@@ -1,11 +1,10 @@
 const express = require('express');
 const multer = require('multer');
 const app = express();
-const port = 3000;
 const fs = require('fs').promises;
 const upload = multer({ dest: 'uploads/' });
-const convertSvgToPng = require('./src/services/svgToPng');
-const convertPngToJpeg = require('./src/services/svgToJpg');
+const convertSvgToPng = require('./services/svgToPng');
+const convertPngToJpeg = require('./services/svgToJpg');
 
 
 app.post('/convert-to-png', upload.single('svgFile'), async (req, res) => {
@@ -33,6 +32,4 @@ app.post('/convert-to-jpeg', upload.single('svgFile'), async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Server running at http://0.0.0.0:${port}`);
-});
+module.exports = app;
